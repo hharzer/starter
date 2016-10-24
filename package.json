@@ -1,0 +1,28 @@
+{
+  "name": "sample-app",
+  "version": "1.1.3",
+  "description": "",
+  "main": "./node_modules/@encore/express/bootstrap.js",
+  "scripts": {
+    "test": "./node_modules/@encore/test/mocha.js",
+    "test:all": "npm run test src/test/**/*.ts",
+    "model": "./node_modules/@encore/model/generate-model.sh",
+    "build": "rm -rf rpm_build/; gulp rpm-build",
+    "serve": "node ./node_modules/@encore/express/bootstrap",
+    "serve:debug": "node --debug-brk=5858 ./node_modules/@encore/express/bootstrap"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@encore/asset": "git+ssh://git@git.eaiti.com/encore/asset.git#v1.1.3",
+    "@encore/auth": "git+ssh://git@git.eaiti.com/encore/auth.git#v1.1.3",
+    "@encore/email": "git+ssh://git@git.eaiti.com/encore/email.git#v1.1.3",
+    "@encore/express": "git+ssh://git@git.eaiti.com/encore/express.git#v1.1.3",
+    "@encore/model": "git+ssh://git@git.eaiti.com/encore/model.git#v1.1.3",
+    "@encore/test": "git+ssh://git@git.eaiti.com/encore/test.git#v1.1.3"
+  },
+  "devDependencies": {
+    "@com.eaiti.build.rpm/gulp-rpm": "git+ssh://git@git.eaiti.com/build/rpm-gulp.git",
+    "gulp": "^3.9.1"
+  }
+}

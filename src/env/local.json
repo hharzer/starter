@@ -1,0 +1,12 @@
+{
+  "mongo": {
+    "schema": "sample"
+  },
+  "app": {
+    "baseUrl": "http://localhost:4200/rest"
+  },
+  "mail": {
+    "transport": "sendmail",
+    "from": "Sample Email <sample@sample.com>"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "express": {
+    "serve": false
+  },
+  "mongo": {
+    "schema": "sample-test"
+  },
+  "app": {},
+  "mail": {
+    "transport": null
+  }
+}
