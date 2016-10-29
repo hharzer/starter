@@ -1,6 +1,6 @@
 {
   "name": "sample-app",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "",
   "main": "./node_modules/@encore/express/bootstrap.js",
   "scripts": {
@@ -14,12 +14,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@encore/asset": "git+ssh://git@git.eaiti.com/encore/asset.git",
-    "@encore/auth": "git+ssh://git@git.eaiti.com/encore/auth.git",
-    "@encore/email": "git+ssh://git@git.eaiti.com/encore/email.git",
-    "@encore/express": "git+ssh://git@git.eaiti.com/encore/express.git",
-    "@encore/model": "git+ssh://git@git.eaiti.com/encore/model.git",
-    "@encore/test": "git+ssh://git@git.eaiti.com/encore/test.git"
+    "@encore/asset": "git+ssh://git@git.eaiti.com/encore/asset.git#v1.x.x",
+    "@encore/auth": "git+ssh://git@git.eaiti.com/encore/auth.git#v1.x.x",
+    "@encore/email": "git+ssh://git@git.eaiti.com/encore/email.git#v1.x.x",
+    "@encore/express": "git+ssh://git@git.eaiti.com/encore/express.git#v1.x.x",
+    "@encore/model": "git+ssh://git@git.eaiti.com/encore/model.git#v1.x.x",
+    "@encore/test": "git+ssh://git@git.eaiti.com/encore/test.git#v1.x.x"
   },
   "devDependencies": {
     "@com.eaiti.build.rpm/gulp-rpm": "git+ssh://git@git.eaiti.com/build/rpm-gulp.git",
