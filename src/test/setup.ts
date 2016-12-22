@@ -1,6 +1,6 @@
 import { beforeAll, beforeTest, afterTest } from '@encore/test';
 import { MongoService } from '@encore/mongo';
-import { Ready } from '@encore/init'
+import { Ready } from '@encore/lifecycle'
 import { setDefault } from '@encore/context/src/ext/test';
 
 let user = {

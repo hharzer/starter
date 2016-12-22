@@ -1,4 +1,4 @@
-import { registerNamespace } from '@encore/init';
-export default registerNamespace('app', {
+import { Configure } from '@encore/config';
+export default Configure.registerNamespace('app', {
   baseUrl: 'http://localhost/rest'
 })
