@@ -8,8 +8,8 @@
     "test:all": "npm run test src/test/**/*.ts",
     "model": "./node_modules/@encore/model/generate-model.sh",
     "build": "rm -rf rpm_build/; gulp rpm-build",
-    "serve": "node ./node_modules/@encore/express/bootstrap",
-    "serve:debug": "node --debug-brk=5858 ./node_modules/@encore/express/bootstrap"
+    "start": "node ./node_modules/@encore/express/bootstrap",
+    "debug": "node --debug-brk=5858 ./node_modules/@encore/express/bootstrap"
   },
   "author": "",
   "license": "ISC",
