@@ -1,27 +1,28 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 import {
   Get, Post, Put, Delete,
   Controller,
   Redirect,
   Cache,
-  TypedRequest,
-  canAccept
-} from '@encore/express';
-import { ModelBody } from '@encore/model/ext/express';
-import { Authenticate, Authenticated, Unauthenticated } from '@encore/auth';
-import { nodeToPromise } from '@encore/util';
+  TypedRequest
+} from '@encore2/express';
+// import { ModelBody } from '@encore2/model/opt/express';
+import { Authenticate, Authenticated, Unauthenticated } from '@encore2/auth';
+import { nodeToPromise } from '@encore2/base';
 import { User } from '../model/user';
 import { UserService } from '../service/user';
-import * as passport from "passport";
 
 @Controller('/auth')
 class Auth {
 
+  constructor(private userService: UserService) { }
+
   @Unauthenticated()
   @Post('/register')
-  @ModelBody(User)
+  // @ModelBody(User)
+  // TODO: Need to fix
   async register(req: TypedRequest<User>, res: Response, next: Function) {
-    let user = await UserService.register(req.body);
+    let user = await this.userService.register(req.body);
     await nodeToPromise<User>(req, req.login, user);
     return user;
   }
@@ -29,13 +30,13 @@ class Auth {
   @Unauthenticated()
   @Post('/reset/:email')
   async resetPasswordStart(req: Request, res: Response, next: Function) {
-    return await UserService.resetPasswordStart(req.params.email);
+    return await this.userService.resetPasswordStart(req.params.email);
   }
 
   @Unauthenticated()
   @Post('/reset')
   async resetPassword(req: Request, res: Response, next: Function) {
-    return await UserService.resetPassword(req.body.email, req.body.password, req.body.token);
+    return await this.userService.resetPassword(req.body.email, req.body.password, req.body.token);
   }
 
 
@@ -52,7 +53,7 @@ class Auth {
   async logout(req: Request): Promise<Redirect | {}> {
     await req.doLogout();
 
-    if (canAccept(req, 'text/html')) {
+    if ((req.headers.accept as string[] || []).includes('text/html')) {
       return new Redirect('/?message=Successfully Logged Out');
     } else {
       return { acknowledged: true };
@@ -63,6 +64,6 @@ class Auth {
   @Unauthenticated()
   @Authenticate('local')
   async login(req: Request): Promise<any> {
-    return UserService.getActiveUser();
+    return this.userService.getActiveUser();
   }
 }

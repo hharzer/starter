@@ -1,25 +1,28 @@
 {
   "name": "sample-app",
-  "version": "1.1.15",
+  "version": "1.0.0",
   "description": "",
-  "main": "./node_modules/@encore/express/bootstrap.js",
+  "main": "./node_modules/@encore2/registry/bootstrap.js",
   "scripts": {
-    "test": "./node_modules/@encore/test/mocha.js",
+    "test": "./node_modules/@encore2/test/mocha.js",
     "test:all": "npm run test src/test/**/*.ts",
-    "model": "./node_modules/@encore/model/generate-model.sh",
+    "model": "./node_modules/@encore2/model/generate-model.sh",
     "build": "rm -rf rpm_build/; gulp rpm-build",
-    "start": "node ./node_modules/@encore/express/bootstrap",
-    "debug": "node --debug-brk=5858 ./node_modules/@encore/express/bootstrap"
+    "start": "node ./node_modules/@encore2/express/bootstrap",
+    "debug": "node --debug-brk=5858 ./node_modules/@encore2/express/bootstrap"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@encore/asset": "git+ssh://git@git.eaiti.com/encore/asset.git#v1.x.x",
-    "@encore/auth": "git+ssh://git@git.eaiti.com/encore/auth.git#v1.x.x",
-    "@encore/email": "git+ssh://git@git.eaiti.com/encore/email.git#v1.x.x",
-    "@encore/express": "git+ssh://git@git.eaiti.com/encore/express.git#v1.x.x",
-    "@encore/model": "git+ssh://git@git.eaiti.com/encore/model.git#v1.x.x",
-    "@encore/test": "git+ssh://git@git.eaiti.com/encore/test.git#v1.x.x"
+    "@encore2/asset": "git+ssh://git@git.eaiti.com/encore2/asset.git#v1.x.x",
+    "@encore2/asset-express": "git+ssh://git@git.eaiti.com/encore2/asset-express.git#v1.x.x",
+    "@encore2/asset-mongo": "git+ssh://git@git.eaiti.com/encore2/asset-mongo.git#v1.x.x",
+    "@encore2/auth": "git+ssh://git@git.eaiti.com/encore2/auth.git#v1.x.x",
+    "@encore2/email": "git+ssh://git@git.eaiti.com/encore2/email.git#v1.x.x",
+    "@encore2/express": "git+ssh://git@git.eaiti.com/encore2/express.git#v1.x.x",
+    "@encore2/model": "git+ssh://git@git.eaiti.com/encore2/model.git#v1.x.x",
+    "@encore2/model-mongo": "git+ssh://git@git.eaiti.com/encore2/model-mongo.git#v1.x.x",
+    "@encore2/test": "git+ssh://git@git.eaiti.com/encore2/test.git#v1.x.x"
   },
   "devDependencies": {
     "@com.eaiti.build.rpm/gulp-rpm": "git+ssh://git@git.eaiti.com/build/rpm-gulp.git",
