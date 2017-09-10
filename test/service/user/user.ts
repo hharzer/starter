@@ -1,17 +1,15 @@
-import { User, Address } from '../../../app/model/user';
-import { UserService } from '../../../app/service/user';
-import { ModelService } from '@encore/model';
-import * as moment from "moment";
-import { expect } from "chai";
+import { User, Address } from '../../../src/model/user';
+import { UserService } from '../../../src/service/user';
+import { ModelService } from '@encore2/model';
+import * as moment from 'moment';
+import { expect } from 'chai';
 
-describe("User Service", () => {
+describe('User Service', () => {
 
-  it("Register a user", async () => {
-    let application = await getApplication();
-
-    let user: User = new User({
-      firstName: "Test",
-      lastName: "User",
+  it('Register a user', async () => {
+    let user: User = User.from({
+      firstName: 'Test',
+      lastName: 'User',
       email: 'ops@eaiti.com',
       phone: '5713064683',
       address: {
@@ -24,6 +22,8 @@ describe("User Service", () => {
       }
     });
     let emptyUser: User = new User();
+
+    // TODO: need to fix
     let res = await UserService.register(user);
     expect(res._id).not.equals(null);
     delete res._id;

@@ -1,5 +1,5 @@
-import { EmailService } from '../../app/service/email';
-import { expect } from "chai";
+import { EmailService } from '../../src/service/email';
+import { expect } from 'chai';
 
 let body = `<style>
   strong { color: orange }
@@ -7,8 +7,8 @@ let body = `<style>
 **{{name}}**`;
 let context = { name: 'Brad' };
 
-describe("Email Service", () => {
-  it("Verify Templating", () => {
+describe('Email Service', () => {
+  it('Verify Templating', () => {
     let result = EmailService.template(body, context);
 
     expect(result).equals(
@@ -18,7 +18,7 @@ describe("Email Service", () => {
     );
   });
 
-  it("Send email", async () => {
-    await EmailService.sendEmail("tim@eaiti.com", "Test", body, context);
+  it('Send email', async () => {
+    await EmailService.sendEmail('tim@eaiti.com', 'Test', body, context);
   })
 });
