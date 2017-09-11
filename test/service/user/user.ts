@@ -3,10 +3,12 @@ import { UserService } from '../../../src/service/user';
 import { ModelService } from '@encore2/model';
 import * as moment from 'moment';
 import { expect } from 'chai';
+import { DependencyRegistry } from '@encore2/di';
 
 describe('User Service', () => {
 
   it('Register a user', async () => {
+    let userService = await DependencyRegistry.getInstance(UserService);
     let user: User = User.from({
       firstName: 'Test',
       lastName: 'User',
@@ -22,19 +24,17 @@ describe('User Service', () => {
       }
     });
     let emptyUser: User = new User();
+    let res = await userService.register(user);
 
-    // TODO: need to fix
-    let res = await UserService.register(user);
-    expect(res._id).not.equals(null);
-    delete res._id;
+    expect(res.id).not.equals(null);
+    delete res.id;
     expect(res).deep.equal(user);
 
     try {
-      let res = await UserService.register(emptyUser);
-      expect(res).equals(null);
+      let res2 = await userService.register(emptyUser);
+      expect(res2).equals(null);
     } catch (e) {
       expect(e).instanceof(Error);
     }
   });
-
 });
