@@ -1,5 +1,3 @@
-import '@encore/auth';
-
 import { ModelService } from '@encore2/model';
 import { Context } from '@encore2/context';
 import { ModelStrategy } from '@encore2/auth/opt/model';
