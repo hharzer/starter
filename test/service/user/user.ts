@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { expect } from 'chai';
 import { DependencyRegistry } from '@encore2/di';
 
+// TODO: Figure out why startup is so slow
+
 describe('User Service', () => {
 
   it('Register a user', async () => {
