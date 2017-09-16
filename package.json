@@ -21,11 +21,11 @@
     "@encore2/email": "git+ssh://git@git.eaiti.com/encore2/email.git#v1.x.x",
     "@encore2/express": "git+ssh://git@git.eaiti.com/encore2/express.git#v1.x.x",
     "@encore2/model": "git+ssh://git@git.eaiti.com/encore2/model.git#v1.x.x",
-    "@encore2/model-mongo": "git+ssh://git@git.eaiti.com/encore2/model-mongo.git#v1.x.x",
-    "@encore2/test": "git+ssh://git@git.eaiti.com/encore2/test.git#v1.x.x"
+    "@encore2/model-mongo": "git+ssh://git@git.eaiti.com/encore2/model-mongo.git#v1.x.x"
   },
   "devDependencies": {
     "@com.eaiti.build.rpm/gulp-rpm": "git+ssh://git@git.eaiti.com/build/rpm-gulp.git",
+    "@encore2/test": "git+ssh://git@git.eaiti.com/encore2/test.git#v1.x.x",
     "gulp": "^3.9.1"
   }
 }

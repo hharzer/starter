@@ -1,3 +1,4 @@
+import '@encore2/auth/opt/model';
 import { Config } from '@encore2/config';
 
 @Config('app')

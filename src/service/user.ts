@@ -38,7 +38,7 @@ export class UserService {
   async register(user: User) {
     user = await this.strategy.register(user, user.password!);
 
-    await this.email.sendActiveUserEmail('Welcome to Sample App', `
+    await this.email.sendUserEmail(this.getActiveUser(), 'Welcome to Sample App', `
 Welcome ${user.firstName},
 
 You are now signed up!

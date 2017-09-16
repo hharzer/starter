@@ -1,0 +1,4 @@
+---
+auth:
+  model:
+    modelClass: '@app:src.model.user.user#User'
