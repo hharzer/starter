@@ -1,3 +1,4 @@
+import * as util from 'util';
 import { Request, Response } from 'express';
 import {
   Get, Post, Put, Delete,
@@ -8,7 +9,6 @@ import {
 } from '@encore2/express';
 // import { ModelBody } from '@encore2/model/opt/express';
 import { Authenticate, Authenticated, Unauthenticated } from '@encore2/auth';
-import { nodeToPromise } from '@encore2/base';
 import { User } from '../model/user';
 import { UserService } from '../service/user';
 
@@ -23,7 +23,7 @@ class Auth {
   // TODO: Need to fix
   async register(req: TypedRequest<User>, res: Response, next: Function) {
     let user = await this.userService.register(req.body);
-    await nodeToPromise<User>(req, req.login, user);
+    await util.promisify(req.login).call(req, user);
     return user;
   }
 

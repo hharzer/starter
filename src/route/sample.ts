@@ -4,9 +4,9 @@ import { Get, Post, Controller, Cache } from '@encore2/express';
 @Controller('/sample')
 class SampleRoute {
 
-  @Get('/')
+  @Get('/hello')
   async get(req: Request) {
-    return await { message: 'Hello' };
+    return await { message: 'Hellos' };
   }
 
   @Post('/')
