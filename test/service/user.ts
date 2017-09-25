@@ -1,15 +1,21 @@
-import { User, Address } from '../../../src/model/user';
-import { UserService } from '../../../src/service/user';
-import { ModelService } from '@encore2/model';
 import * as moment from 'moment';
-import { expect } from 'chai';
+import * as assert from 'assert';
+
+import { ModelService } from '@encore2/model';
 import { DependencyRegistry } from '@encore2/di';
+import { Test, Suite } from '@encore2/test';
+
+import { User, Address } from '../../src/model/user';
+import { UserService } from '../../src/service/user';
 
 // TODO: Figure out why startup is so slow
 
-describe('User Service', () => {
+@Suite('User Service')
+class UserServiceTest {
 
-  it('Register a user', async () => {
+  @Test('Register a user')
+  async register() {
+    await DependencyRegistry.init();
     let userService = await DependencyRegistry.getInstance(UserService);
     let user: User = User.from({
       firstName: 'Test',
@@ -28,15 +34,15 @@ describe('User Service', () => {
     let emptyUser: User = new User();
     let res = await userService.register(user);
 
-    expect(res.id).not.equals(null);
+    assert(res.id !== null);
     delete res.id;
-    expect(res).deep.equal(user);
+    assert.deepEqual(res, user);
 
     try {
       let res2 = await userService.register(emptyUser);
-      expect(res2).equals(null);
+      assert(res2 === null);
     } catch (e) {
-      expect(e).instanceof(Error);
+      assert(e.instanceof(Error));
     }
-  });
-});
+  }
+}
