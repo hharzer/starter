@@ -2,30 +2,28 @@
   "name": "sample-app",
   "version": "1.0.0",
   "description": "",
-  "main": "./node_modules/@encore2/registry/bootstrap.js",
+  "main": "./node_modules/@travetto/registry/bootstrap.js",
   "scripts": {
-    "test": "./node_modules/@encore2/test/mocha.js",
+    "test": "./node_modules/.bin/travetto-test.js",
     "test:all": "npm run test src/test/**/*.ts",
-    "model": "./node_modules/@encore2/model/generate-model.sh",
-    "build": "rm -rf rpm_build/; gulp rpm-build",
-    "start": "node ./node_modules/@encore2/registry/bootstrap",
-    "debug": "node --debug-brk=5858 ./node_modules/@encore2/registry/bootstrap"
+    "model": "./node_modules/@travetto/model/generate-model.sh",
+    "start": "node ./node_modules/@travetto/registry/bootstrap",
+    "debug": "node --debug-brk=5858 ./node_modules/@travetto/registry/bootstrap"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@encore2/asset": "git+ssh://git@git.eaiti.com/encore2/asset.git#v1.x.x",
-    "@encore2/asset-express": "git+ssh://git@git.eaiti.com/encore2/asset-express.git#v1.x.x",
-    "@encore2/asset-mongo": "git+ssh://git@git.eaiti.com/encore2/asset-mongo.git#v1.x.x",
-    "@encore2/auth": "git+ssh://git@git.eaiti.com/encore2/auth.git#v1.x.x",
-    "@encore2/email": "git+ssh://git@git.eaiti.com/encore2/email.git#v1.x.x",
-    "@encore2/express": "git+ssh://git@git.eaiti.com/encore2/express.git#v1.x.x",
-    "@encore2/model": "git+ssh://git@git.eaiti.com/encore2/model.git#v1.x.x",
-    "@encore2/model-mongo": "git+ssh://git@git.eaiti.com/encore2/model-mongo.git#v1.x.x"
+    "@travetto/asset": "0.x.x",
+    "@travetto/asset-express": "0.x.x",
+    "@travetto/asset-mongo": "0.x.x",
+    "@travetto/auth": "0.x.x",
+    "@travetto/email": "0.x.x",
+    "@travetto/express": "0.x.x",
+    "@travetto/model": "0.x.x",
+    "@travetto/model-mongo": "0.x.x"
   },
   "devDependencies": {
-    "@com.eaiti.build.rpm/gulp-rpm": "git+ssh://git@git.eaiti.com/build/rpm-gulp.git",
-    "@encore2/test": "git+ssh://git@git.eaiti.com/encore2/test.git#v1.x.x",
+    "@travetto/test": "0.x.x",
     "gulp": "^3.9.1"
   }
 }

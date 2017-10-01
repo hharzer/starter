@@ -1,5 +1,5 @@
-import '@encore2/auth/opt/model';
-import { Config } from '@encore2/config';
+import '@travetto/auth/opt/model';
+import { Config } from '@travetto/config';
 
 @Config('app')
 export class AppConfig {

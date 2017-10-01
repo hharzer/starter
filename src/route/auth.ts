@@ -6,9 +6,9 @@ import {
   Redirect,
   Cache,
   TypedRequest
-} from '@encore2/express';
-// import { ModelBody } from '@encore2/model/opt/express';
-import { Authenticate, Authenticated, Unauthenticated } from '@encore2/auth';
+} from '@travetto/express';
+// import { ModelBody } from '@travetto/model/opt/express';
+import { Authenticate, Authenticated, Unauthenticated } from '@travetto/auth';
 import { User } from '../model/user';
 import { UserService } from '../service/user';
 

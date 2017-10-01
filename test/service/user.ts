@@ -1,9 +1,9 @@
 import * as moment from 'moment';
 import * as assert from 'assert';
 
-import { ModelService } from '@encore2/model';
-import { DependencyRegistry } from '@encore2/di';
-import { Test, Suite } from '@encore2/test';
+import { ModelService } from '@travetto/model';
+import { DependencyRegistry } from '@travetto/di';
+import { Test, Suite } from '@travetto/test';
 
 import { User, Address } from '../../src/model/user';
 import { UserService } from '../../src/service/user';

@@ -1,4 +1,4 @@
-import { Model, BaseModel } from '@encore2/model';
+import { Model, BaseModel } from '@travetto/model';
 import { Address } from './address';
 
 @Model()

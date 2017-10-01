@@ -1,14 +1,14 @@
-import { ModelService } from '@encore2/model';
-import * as encoreMail from '@encore2/email';
+import { ModelService } from '@travetto/model';
+import * as travettoMail from '@encore/email';
 import { User } from '../model/user';
-import { Injectable } from '@encore2/di';
+import { Injectable } from '@travetto/di';
 
 @Injectable()
 export class EmailService {
   sendEmail: any;
   template: any;
 
-  constructor(private email: encoreMail.EmailService) {
+  constructor(private email: travettoMail.EmailService) {
     this.sendEmail = email.sendEmail;
     this.template = email.template
   }

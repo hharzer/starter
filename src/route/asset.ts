@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { Get, Post, Controller, Cache } from '@encore2/express';
-import { AssetService, ImageService, AssetFile, AssetUtil } from '@encore2/asset';
-import { AssetUpload } from '@encore2/asset-express';
-import { Inject } from '@encore2/di';
+import { Get, Post, Controller, Cache } from '@travetto/express';
+import { AssetService, ImageService, AssetFile, AssetUtil } from '@travetto/asset';
+import { AssetUpload } from '@travetto/asset-express';
+import { Inject } from '@travetto/di';
 
 @Controller('/asset')
 class AssetRoute {

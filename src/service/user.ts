@@ -1,9 +1,9 @@
-import { ModelService } from '@encore2/model';
-import { Context } from '@encore2/context';
-import { ModelStrategy } from '@encore2/auth/opt/model';
+import { ModelService } from '@travetto/model';
+import { Context } from '@travetto/context';
+import { ModelStrategy } from '@travetto/auth/opt/model';
 import { User } from '../model/user';
 import { AppConfig } from '../config';
-import { Injectable } from '@encore2/di';
+import { Injectable } from '@travetto/di';
 import { EmailService } from './email';
 
 @Injectable()

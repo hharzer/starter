@@ -1,6 +1,6 @@
 import { EmailService } from '../../src/service/email';
-import { DependencyRegistry } from '@encore2/di';
-import { Test, Suite } from '@encore2/test';
+import { DependencyRegistry } from '@travetto/di';
+import { Test, Suite } from '@travetto/test';
 import * as assert from 'assert';
 
 let body = `<style>

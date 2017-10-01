@@ -1,4 +1,4 @@
-import { Schema, SchemaBound } from '@encore2/schema';
+import { Schema, SchemaBound } from '@travetto/schema';
 
 @Schema()
 export class Address extends SchemaBound {

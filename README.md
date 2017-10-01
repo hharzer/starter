@@ -1,4 +1,4 @@
-encore: Starter
+travetto: Starter
 ===
 
 Sample Starter for a node core app.  This utilizes the following modules:
