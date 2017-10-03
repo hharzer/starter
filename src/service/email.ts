@@ -1,5 +1,5 @@
 import { ModelService } from '@travetto/model';
-import * as travettoMail from '@encore/email';
+import * as travettoMail from '@travetto/email';
 import { User } from '../model/user';
 import { Injectable } from '@travetto/di';
 

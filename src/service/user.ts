@@ -8,6 +8,7 @@ import { EmailService } from './email';
 
 @Injectable()
 export class UserService {
+
   constructor(
     private config: AppConfig,
     private strategy: ModelStrategy<User>,

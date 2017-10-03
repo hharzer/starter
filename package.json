@@ -4,7 +4,7 @@
   "description": "",
   "main": "./node_modules/@travetto/registry/bootstrap.js",
   "scripts": {
-    "test": "./node_modules/.bin/travetto-test.js",
+    "test": "./node_modules/.bin/travetto-test",
     "test:all": "npm run test src/test/**/*.ts",
     "model": "./node_modules/@travetto/model/generate-model.sh",
     "start": "node ./node_modules/@travetto/registry/bootstrap",
