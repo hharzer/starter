@@ -2,7 +2,7 @@ import * as moment from 'moment';
 import * as assert from 'assert';
 
 import { ModelService, ModelRegistry, ModelSource } from '@travetto/model';
-import { MongoModelSource, ModelMongoConfig } from '@travetto/model-mongo';
+import { ModelMongoSource, ModelMongoConfig } from '@travetto/model-mongo';
 import { DependencyRegistry, Injectable } from '@travetto/di';
 import { Test, Suite, BeforeAll } from '@travetto/test';
 
@@ -26,7 +26,7 @@ class UserServiceTest {
     await RootRegistry.init();
     let svc = await DependencyRegistry.getInstance(ModelService);
     this.context = await DependencyRegistry.getInstance(Context);
-    let db = (svc as any).source as MongoModelSource;
+    let db = (svc as any).source as ModelMongoSource;
     await db.resetDatabase();
   }
 
