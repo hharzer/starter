@@ -5,12 +5,12 @@ import { Injectable } from '@travetto/di';
 
 @Injectable()
 export class EmailService {
-  sendEmail: any;
-  template: any;
+  sendEmail: travettoMail.EmailService['sendEmail'];
+  template: travettoMail.EmailService['template'];
 
   constructor(private email: travettoMail.EmailService) {
-    this.sendEmail = email.sendEmail;
-    this.template = email.template
+    this.sendEmail = email.sendEmail.bind(email);
+    this.template = email.template.bind(email);
   }
 
   async sendUserEmail(user: User, subject: string, template: string, context: any) {
