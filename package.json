@@ -19,6 +19,7 @@
     "@travetto/auth": "0.x.x",
     "@travetto/email": "0.x.x",
     "@travetto/express": "0.x.x",
+    "@travetto/express-schema": "0.0.2",
     "@travetto/model": "0.x.x",
     "@travetto/model-mongo": "0.x.x"
   },

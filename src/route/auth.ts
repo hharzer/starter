@@ -7,7 +7,7 @@ import {
   Cache,
   TypedRequest
 } from '@travetto/express';
-// import { ModelBody } from '@travetto/model/opt/express';
+import { SchemaBody } from '@travetto/express-schema';
 import { Authenticate, Authenticated, Unauthenticated } from '@travetto/auth';
 import { User } from '../model/user';
 import { UserService } from '../service/user';
@@ -19,8 +19,7 @@ class Auth {
 
   @Unauthenticated()
   @Post('/register')
-  // @ModelBody(User)
-  // TODO: Need to fix
+  @SchemaBody(User)
   async register(req: TypedRequest<User>, res: Response, next: Function) {
     let user = await this.userService.register(req.body);
     await util.promisify(req.login).call(req, user);
