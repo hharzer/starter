@@ -20,7 +20,7 @@ export class UserService {
   }
 
   async get(userId: string) {
-    let user = await this.model.getById(User, userId);
+    const user = await this.model.getById(User, userId);
     return user;
   }
 
@@ -62,7 +62,7 @@ You are now signed up!
   }
 
   async resetPasswordStart(email: string) {
-    let user = await this.strategy.generateResetToken(email);
+    const user = await this.strategy.generateResetToken(email);
     await this.email.sendUserEmail(user, 'Password Reset for Sample App', `
 Hi ${user.firstName},
 

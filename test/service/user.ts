@@ -19,7 +19,7 @@ class Conf extends ModelMongoConfig {
 @Suite('User Service')
 class UserServiceTest {
 
-  context: Context;
+  context!: Context;
 
   @BeforeAll()
   async init() {
@@ -33,9 +33,9 @@ class UserServiceTest {
   @Test('Register a user')
   @WithContext()
   async register() {
-    let userService = await DependencyRegistry.getInstance(UserService);
+    const userService = await DependencyRegistry.getInstance(UserService);
 
-    let user: User = User.from({
+    const user: User = User.from({
       firstName: 'Test',
       lastName: 'User',
       email: 'ops@eaiti.com',
@@ -51,16 +51,17 @@ class UserServiceTest {
       }
     });
 
-    let emptyUser: User = new User();
-    let ctx = await DependencyRegistry.getInstance(Context);
-    let res = await userService.register(user);
+    const emptyUser: User = new User();
+    const ctx = await DependencyRegistry.getInstance(Context);
+    const res = await userService.register(user);
 
     assert(res.id !== null);
     delete res.id;
-    assert.deepEqual(res, user);
+    assert.deepEqual(user, res);
+    assert(user.id === undefined);
 
     try {
-      let res2 = await userService.register(emptyUser);
+      const res2 = await userService.register(emptyUser);
       assert(res2 === null);
     } catch (e) {
       assert(e.message === 'That email is already taken.');

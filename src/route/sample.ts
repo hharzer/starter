@@ -6,7 +6,7 @@ class SampleRoute {
 
   @Get('/hello')
   async get(req: Request) {
-    return await { message: 'Hellos' };
+    return await { message: 'Hellod' };
   }
 
   @Post('/')

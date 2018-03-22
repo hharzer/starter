@@ -18,8 +18,8 @@ export class User extends BaseModel {
   phone: string;
   address?: Address;
 
-  prePersist(): this {
+  prePersist() {
     delete this.password; // Do not allow this to be saved;
-    return super.prePersist();
+    super.prePersist();
   }
 }

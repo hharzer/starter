@@ -8,10 +8,10 @@ import { Inject } from '@travetto/di';
 class AssetRoute {
 
   @Inject()
-  image: ImageService;
+  image!: ImageService;
 
   @Inject()
-  asset: AssetService;
+  asset!: AssetService;
 
   @Cache(1, 'year')
   @Get(/(.*).(png|jpg|jpeg|gif|bmp)/i)
@@ -28,8 +28,8 @@ class AssetRoute {
   @Post('/')
   @AssetUpload()
   async upload(req: Request) {
-    let file = Object.values((req as any).files)[0] as AssetFile;
-    let res = await this.asset.save(AssetUtil.fileToAsset(file));
+    const file = Object.values((req as any).files)[0] as AssetFile;
+    const res = await this.asset.save(AssetUtil.fileToAsset(file));
     return Object.assign({}, res);
   }
 }

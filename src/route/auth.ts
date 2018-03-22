@@ -9,6 +9,7 @@ import {
 } from '@travetto/express';
 import { SchemaBody } from '@travetto/express-schema';
 import { Authenticate, Authenticated, Unauthenticated } from '@travetto/auth';
+import { ModelStrategy } from '@travetto/auth/opt/model';
 import { User } from '../model/user';
 import { UserService } from '../service/user';
 
@@ -21,7 +22,7 @@ class Auth {
   @Post('/register')
   @SchemaBody(User)
   async register(req: TypedRequest<User>, res: Response, next: Function) {
-    let user = await this.userService.register(req.body);
+    const user = await this.userService.register(req.body);
     await util.promisify(req.login).call(req, user);
     return user;
   }
@@ -52,7 +53,7 @@ class Auth {
   async logout(req: Request): Promise<Redirect | {}> {
     await req.doLogout();
 
-    if ((req.headers.accept as string[] || []).includes('text/html')) {
+    if ((req.headers.accept as any as string[] || []).includes('text/html')) {
       return new Redirect('/?message=Successfully Logged Out');
     } else {
       return { acknowledged: true };
