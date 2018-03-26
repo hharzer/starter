@@ -13,7 +13,6 @@ const body = `<style>
 
 const context = { name: 'Brad' };
 
-
 @Suite('Email Service')
 class EmailServiceTest {
   @BeforeAll()

@@ -24,9 +24,9 @@ class UserServiceTest {
   @BeforeAll()
   async init() {
     await RootRegistry.init();
-    let svc = await DependencyRegistry.getInstance(ModelService);
+    const svc = await DependencyRegistry.getInstance(ModelService);
     this.context = await DependencyRegistry.getInstance(Context);
-    let db = (svc as any).source as ModelMongoSource;
+    const db = (svc as any).source as ModelMongoSource;
     await db.resetDatabase();
   }
 

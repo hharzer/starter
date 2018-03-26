@@ -39,7 +39,6 @@ class Auth {
     return await this.userService.resetPassword(req.body.email, req.body.password, req.body.token);
   }
 
-
   @Get('/checkToken')
   async checkToken(req: Request) {
     if (req.isUnauthenticated()) {

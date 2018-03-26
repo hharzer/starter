@@ -30,6 +30,6 @@ class AssetRoute {
   async upload(req: Request) {
     const file = Object.values((req as any).files)[0] as AssetFile;
     const res = await this.asset.save(AssetUtil.fileToAsset(file));
-    return Object.assign({}, res);
+    return { ...res };
   }
 }
