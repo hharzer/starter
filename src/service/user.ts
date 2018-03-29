@@ -1,6 +1,6 @@
 import { ModelService } from '@travetto/model';
 import { Context } from '@travetto/context';
-import { ModelStrategy } from '@travetto/auth/opt/model';
+import { ModelStrategy } from '@travetto/auth/src/strategy/model';
 import { User } from '../model/user';
 import { AppConfig } from '../config';
 import { Injectable } from '@travetto/di';
@@ -40,10 +40,10 @@ export class UserService {
     user = await this.strategy.register(user, user.password!);
 
     await this.email.sendUserEmail(this.getActiveUser(), 'Welcome to Sample App', `
-Welcome ${user.firstName},
+    Welcome ${user.firstName},
 
-You are now signed up!
-    `, {})
+    You are now signed up!
+        `, {})
     return user;
   }
 

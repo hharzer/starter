@@ -8,10 +8,12 @@ import {
   TypedRequest
 } from '@travetto/express';
 import { SchemaBody } from '@travetto/express-schema';
-import { Authenticate, Authenticated, Unauthenticated } from '@travetto/auth';
-import { ModelStrategy } from '@travetto/auth/opt/model';
+import { Authenticate, Authenticated, Unauthenticated, BaseStrategy } from '@travetto/auth';
 import { User } from '../model/user';
 import { UserService } from '../service/user';
+import { InjectableFactory } from '@travetto/di';
+import { ModelStrategy, ModelStrategyConfig } from '@travetto/auth/src/strategy/model';
+import { ModelService } from '@travetto/model';
 
 @Controller('/auth')
 class Auth {

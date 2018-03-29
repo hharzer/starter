@@ -3,17 +3,20 @@ import * as assert from 'assert';
 
 import { ModelService, ModelRegistry, ModelSource } from '@travetto/model';
 import { ModelMongoSource, ModelMongoConfig } from '@travetto/model-mongo';
-import { DependencyRegistry, Injectable } from '@travetto/di';
+import { DependencyRegistry, Injectable, InjectableFactory } from '@travetto/di';
 import { Test, Suite, BeforeAll } from '@travetto/test';
 
 import { User, Address } from '../../src/model/user';
 import { UserService } from '../../src/service/user';
 import { RootRegistry } from '@travetto/registry';
 import { Context, WithContext } from '@travetto/context';
+import { Schema, SchemaRegistry, SchemaValidator } from '@travetto/schema';
 
-@Injectable({ target: ModelMongoConfig })
-class Conf extends ModelMongoConfig {
-
+class Config {
+  @InjectableFactory({ class: ModelSource as any })
+  static getModelSource(config: ModelMongoConfig) {
+    return new ModelMongoSource(config);
+  }
 }
 
 @Suite('User Service')
@@ -31,7 +34,12 @@ class UserServiceTest {
   }
 
   @Test('Register a user')
-  @WithContext()
+  @WithContext({
+    user: {
+      firstName: 'bob',
+      email: 'bob@bob.com'
+    }
+  })
   async register() {
     const userService = await DependencyRegistry.getInstance(UserService);
 
@@ -53,6 +61,7 @@ class UserServiceTest {
 
     const emptyUser: User = new User();
     const ctx = await DependencyRegistry.getInstance(Context);
+
     const res = await userService.register(user);
 
     assert(res.id !== null);
