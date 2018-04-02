@@ -32,7 +32,7 @@ class AuthConfig {
   }
 
   @InjectableFactory()
-  static getSource(config: ModelMongoConfig): ModelSource {
+  static getSource(config: ModelMongoConfig, ): ModelSource {
     return new ModelMongoSource(config);
   }
 }

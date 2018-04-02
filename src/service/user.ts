@@ -3,21 +3,17 @@ import { Context } from '@travetto/context';
 import { ModelStrategy } from '@travetto/auth/src/strategy/model';
 import { User } from '../model/user';
 import { AppConfig } from '../config';
-import { Injectable } from '@travetto/di';
+import { Injectable, Inject } from '@travetto/di';
 import { EmailService } from './email';
 
 @Injectable()
 export class UserService {
 
-  constructor(
-    private config: AppConfig,
-    private strategy: ModelStrategy<User>,
-    private email: EmailService,
-    private model: ModelService,
-    private context: Context
-  ) {
-
-  }
+  @Inject() config: AppConfig;
+  @Inject() strategy: ModelStrategy<User>;
+  @Inject() email: EmailService;
+  @Inject() model: ModelService;
+  @Inject() context: Context;
 
   async get(userId: string) {
     const user = await this.model.getById(User, userId);

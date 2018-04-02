@@ -3,7 +3,7 @@ import * as assert from 'assert';
 
 import { ModelService, ModelRegistry, ModelSource, BaseModel } from '@travetto/model';
 import { ModelMongoSource, ModelMongoConfig } from '@travetto/model-mongo';
-import { DependencyRegistry, Injectable, InjectableFactory } from '@travetto/di';
+import { DependencyRegistry, Injectable, InjectableFactory, Inject } from '@travetto/di';
 import { Test, Suite, BeforeAll } from '@travetto/test';
 
 import { User, Address } from '../../src/model/user';
@@ -11,19 +11,8 @@ import { UserService } from '../../src/service/user';
 import { RootRegistry } from '@travetto/registry';
 import { Context, WithContext } from '@travetto/context';
 import { Schema, SchemaRegistry, SchemaValidator } from '@travetto/schema';
-import { ModelStrategy, ModelStrategyConfig } from '@travetto/auth/src/strategy/model';
+import { TEST } from './config';
 
-class Config {
-  @InjectableFactory()
-  static getModelSource(config: ModelMongoConfig): ModelSource {
-    return new ModelMongoSource(config);
-  }
-
-  @InjectableFactory()
-  static getModelStrategy<T extends BaseModel>(cfg: ModelStrategyConfig, svc: ModelService): ModelStrategy<T> {
-    return new ModelStrategy(cfg, svc);
-  }
-}
 @Suite('User Service')
 class UserServiceTest {
 
@@ -32,7 +21,7 @@ class UserServiceTest {
   @BeforeAll()
   async init() {
     await RootRegistry.init();
-    const svc = await DependencyRegistry.getInstance(ModelService);
+    const svc = await DependencyRegistry.getInstance(ModelService, TEST);
     this.context = await DependencyRegistry.getInstance(Context);
     const db = (svc as any).source as ModelMongoSource;
     await db.resetDatabase();
@@ -46,7 +35,7 @@ class UserServiceTest {
     }
   })
   async register() {
-    const userService = await DependencyRegistry.getInstance(UserService);
+    const userService = await DependencyRegistry.getInstance(UserService, TEST);
 
     const user: User = User.from({
       firstName: 'Test',
