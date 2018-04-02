@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import * as assert from 'assert';
 
-import { ModelService, ModelRegistry, ModelSource } from '@travetto/model';
+import { ModelService, ModelRegistry, ModelSource, BaseModel } from '@travetto/model';
 import { ModelMongoSource, ModelMongoConfig } from '@travetto/model-mongo';
 import { DependencyRegistry, Injectable, InjectableFactory } from '@travetto/di';
 import { Test, Suite, BeforeAll } from '@travetto/test';
@@ -11,14 +11,19 @@ import { UserService } from '../../src/service/user';
 import { RootRegistry } from '@travetto/registry';
 import { Context, WithContext } from '@travetto/context';
 import { Schema, SchemaRegistry, SchemaValidator } from '@travetto/schema';
+import { ModelStrategy, ModelStrategyConfig } from '@travetto/auth/src/strategy/model';
 
 class Config {
-  @InjectableFactory({ class: ModelSource as any })
-  static getModelSource(config: ModelMongoConfig) {
+  @InjectableFactory()
+  static getModelSource(config: ModelMongoConfig): ModelSource {
     return new ModelMongoSource(config);
   }
-}
 
+  @InjectableFactory()
+  static getModelStrategy<T extends BaseModel>(cfg: ModelStrategyConfig, svc: ModelService): ModelStrategy<T> {
+    return new ModelStrategy(cfg, svc);
+  }
+}
 @Suite('User Service')
 class UserServiceTest {
 

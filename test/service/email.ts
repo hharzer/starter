@@ -5,6 +5,7 @@ import { RootRegistry } from '@travetto/registry';
 
 import * as assert from 'assert';
 import { MailConfig } from '@travetto/email/src/config';
+import { TemplateEngine } from '@travetto/email/src/template';
 
 const body = `<style>
   strong { color: orange }
@@ -22,8 +23,8 @@ class EmailServiceTest {
 
   @Test('Verify Templating')
   async templating() {
-    const service = await DependencyRegistry.getInstance(EmailService);
-    const result = service.template(body, context);
+    const tplr = await DependencyRegistry.getInstance(TemplateEngine);
+    const result = (await tplr.template(body, context)).html;
 
     assert(/<strong style="color: orange;">\s*Brad\s*<\/strong>/.test(result));
   }
@@ -31,7 +32,7 @@ class EmailServiceTest {
   @Test('Send email')
   async sendEmail() {
     const service = await DependencyRegistry.getInstance(EmailService);
-    await service.sendEmail([], { to: 'tim@eaiti.com', subject: 'Test', body, context });
+    await service.sendEmail([], { to: 'tim@eaiti.com', subject: 'Test', text: body, context });
     assert(true);
   }
 }
