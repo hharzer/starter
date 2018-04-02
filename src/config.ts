@@ -11,22 +11,28 @@ export class AppConfig {
   baseUrl = 'http://localhost/rest'
 }
 
-export const AUTH_MODEL = Symbol('auth');
+export const AUTH = Symbol('auth');
+
+@Config('auth.mongo')
+class AuthMongo extends ModelMongoConfig { }
+
+@Config('auth.strategy')
+class AuthModelStrategy extends ModelStrategyConfig { }
 
 class AuthConfig {
 
-  @InjectableFactory({ class: ModelSource as any })
-  static getAuthMongo(@Inject() config: ModelMongoConfig) {
+  @InjectableFactory(AUTH)
+  static getAuthMongo(config: AuthMongo): ModelSource {
     return new ModelMongoSource(config);
   }
 
-  @InjectableFactory({ class: ModelStrategy })
-  static getStrategy(config: ModelStrategyConfig, @Inject() src: ModelSource, qsvc: QueryVerifierService) {
+  @InjectableFactory()
+  static getStrategy(config: AuthModelStrategy, @Inject(AUTH) src: ModelSource, qsvc: QueryVerifierService): ModelStrategy<any> {
     return new ModelStrategy(config, new ModelService(src, qsvc));
   }
 
-  @InjectableFactory({ class: ModelSource as any, qualifier: AUTH_MODEL })
-  static getSource(config: ModelMongoConfig) {
+  @InjectableFactory()
+  static getSource(config: ModelMongoConfig): ModelSource {
     return new ModelMongoSource(config);
   }
 }
