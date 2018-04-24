@@ -8,10 +8,10 @@ import { Inject } from '@travetto/di';
 class AssetRoute {
 
   @Inject()
-  image!: ImageService;
+  image: ImageService;
 
   @Inject()
-  asset!: AssetService;
+  asset: AssetService;
 
   @Cache(1, 'year')
   @Get(/(.*).(png|jpg|jpeg|gif|bmp)/i)

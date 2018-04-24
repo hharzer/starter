@@ -13,10 +13,10 @@ import { Context, WithContext } from '@travetto/context';
 import { Schema, SchemaRegistry, SchemaValidator } from '@travetto/schema';
 import { TEST } from './config';
 
-@Suite('User Service')
+@Suite('User Services')
 class UserServiceTest {
 
-  context!: Context;
+  context: Context;
 
   @BeforeAll()
   async init() {
@@ -25,6 +25,11 @@ class UserServiceTest {
     this.context = await DependencyRegistry.getInstance(Context);
     const db = (svc as any).source as ModelMongoSource;
     await db.resetDatabase();
+  }
+
+  @Test('Delete a user')
+  async removeUser() {
+    assert(true);
   }
 
   @Test('Register a user')
