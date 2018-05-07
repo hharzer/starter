@@ -11,7 +11,7 @@
     "debug": "node --debug-brk=5858 ./node_modules/@travetto/base/bootstrap"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@travetto/asset": "0.x.x",
     "@travetto/asset-express": "0.x.x",
@@ -19,7 +19,6 @@
     "@travetto/auth": "0.x.x",
     "@travetto/email": "0.x.x",
     "@travetto/express": "0.x.x",
-    "@travetto/express-schema": "0.x.x",
     "@travetto/model": "0.x.x",
     "@travetto/model-mongo": "0.x.x"
   },
