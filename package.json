@@ -7,8 +7,8 @@
     "test": "./node_modules/.bin/travetto-test",
     "test:all": "npm run test src/test/**/*.ts",
     "model": "./node_modules/@travetto/model/generate-model.sh",
-    "start": "node ./node_modules/@travetto/base/bootstrap",
-    "debug": "node --debug-brk=5858 ./node_modules/@travetto/base/bootstrap"
+    "start": "node ./node_modules/.bin/travetto",
+    "debug": "node --debug-brk=5858 ./node_modules/.bin/travetto"
   },
   "author": "",
   "license": "MIT",
@@ -23,7 +23,6 @@
     "@travetto/model-mongo": "0.x.x"
   },
   "devDependencies": {
-    "@travetto/test": "0.x.x",
-    "gulp": "^3.9.1"
+    "@travetto/test": "0.x.x"
   }
 }
