@@ -2,8 +2,10 @@ import { InjectableFactory, Inject } from '@travetto/di';
 import { ModelMongoConfig, ModelMongoSource } from '@travetto/model-mongo';
 import { ModelSource, ModelService, BaseModel } from '@travetto/model';
 import { QueryVerifierService } from '@travetto/model/src/service/query';
-import { ModelStrategyConfig, ModelStrategy } from '@travetto/auth/src/strategy/model';
 import { UserService } from '../../src/service/user';
+import { AuthSource } from '@travetto/auth/src/source';
+import { AuthModelConfig, AuthModelSource } from '@travetto/auth/src/source/model';
+import { AuthStrategy } from '@travetto/auth';
 
 export const TEST = Symbol()
 
@@ -19,12 +21,12 @@ class Config {
   }
 
   @InjectableFactory(TEST)
-  static getModelStrategy<T extends BaseModel>(cfg: ModelStrategyConfig, svc: ModelService): ModelStrategy<T> {
-    return new ModelStrategy(cfg, svc);
+  static getModelStrategy<T extends BaseModel>(cfg: AuthModelConfig, svc: ModelService): AuthSource<T, AuthModelConfig> {
+    return new AuthModelSource(cfg, svc);
   }
 
   @InjectableFactory(TEST)
-  static getUserSvc(@Inject(TEST) svc: ModelService, @Inject(TEST) strat: ModelStrategy<any>): UserService {
+  static getUserSvc(@Inject(TEST) svc: ModelService, @Inject(TEST) strat: AuthStrategy<any>): UserService {
     const out = new UserService();
     out.model = svc;
     out.strategy = strat;

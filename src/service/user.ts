@@ -5,6 +5,7 @@ import { User } from '../model/user';
 import { AppConfig } from '../config';
 import { Injectable, Inject } from '@travetto/di';
 import { EmailService } from './email';
+import { AuthModelSource } from '@travetto/auth/src/source/model';
 
 @Injectable()
 export class UserService {
@@ -33,7 +34,7 @@ export class UserService {
   }
 
   async register(user: User) {
-    user = await this.strategy.register(user, user.password!);
+    user = await this.strategy.register!(user, user.password!);
 
     await this.email.sendUserEmail(this.getActiveUser(), 'Welcome to Sample App', `
     Welcome ${user.firstName},
@@ -44,12 +45,17 @@ export class UserService {
   }
 
   async changePassword(email: string, newPassword: string, oldPassword: string) {
-    return await this.strategy.changePassword(email, newPassword, oldPassword);
+    return await this.strategy.changePassword!(email, newPassword, oldPassword);
   }
 
   async resetPassword(email: string, newPassword: string, resetToken: string) {
-    let user = await this.model.getByQuery(User, { email, resetToken });
-    user = await this.strategy.changePassword(email, newPassword, resetToken);
+    let user = await this.model.getByQuery(User, {
+      where: {
+        email,
+        resetToken
+      }
+    });
+    user = await this.strategy.changePassword!(email, newPassword, resetToken);
     // Clear token,
     // TODO: FIX
     // delete user.resetExpires;
@@ -58,7 +64,7 @@ export class UserService {
   }
 
   async resetPasswordStart(email: string) {
-    const user = await this.strategy.generateResetToken(email);
+    const user = await (this.strategy['source'] as AuthModelSource<User>).generateResetToken(email);
     await this.email.sendUserEmail(user, 'Password Reset for Sample App', `
 Hi ${user.firstName},
 
