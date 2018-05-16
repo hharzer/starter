@@ -1,6 +1,6 @@
 import { ModelService } from '@travetto/model';
 import { Context } from '@travetto/context';
-import { ModelStrategy } from '@travetto/auth/src/strategy/model';
+import { AuthStrategy } from '@travetto/auth';
 import { User } from '../model/user';
 import { AppConfig } from '../config';
 import { Injectable, Inject } from '@travetto/di';
@@ -10,7 +10,7 @@ import { EmailService } from './email';
 export class UserService {
 
   @Inject() config: AppConfig;
-  @Inject() strategy: ModelStrategy<User>;
+  @Inject() strategy: AuthStrategy<User, any>;
   @Inject() email: EmailService;
   @Inject() model: ModelService;
   @Inject() context: Context;

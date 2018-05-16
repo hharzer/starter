@@ -1,12 +1,12 @@
 import { Config } from '@travetto/config';
 import { InjectableFactory, Inject } from '@travetto/di';
-import { ModelStrategyConfig, ModelStrategy } from '@travetto/auth/src/strategy/model';
+import { AuthModelSource, AuthModelConfig } from '@travetto/auth/src/source/model';
 import { ModelService, ModelSource } from '@travetto/model';
-import { BaseStrategy } from '@travetto/auth';
 import { ModelMongoConfig, ModelMongoSource } from '@travetto/model-mongo';
 import { QueryVerifierService } from '@travetto/model/src/service/query';
 import { AssetSource } from '@travetto/asset';
 import { AssetMongoSource, AssetMongoConfig } from '@travetto/asset-mongo';
+import { AuthSource } from '@travetto/auth/src/source';
 
 require('@travetto/express/src/extension/context');
 
@@ -21,7 +21,7 @@ export const AUTH = Symbol('auth');
 class AuthMongo extends ModelMongoConfig { }
 
 @Config('auth.strategy')
-class AuthModelStrategy extends ModelStrategyConfig { }
+class AuthConf extends AuthModelConfig { }
 
 class AssetConfig {
   @InjectableFactory()
@@ -38,8 +38,8 @@ class AuthConfig {
   }
 
   @InjectableFactory()
-  static getStrategy(config: AuthModelStrategy, @Inject(AUTH) src: ModelSource, qsvc: QueryVerifierService): ModelStrategy<any> {
-    return new ModelStrategy(config, new ModelService(src, qsvc));
+  static getAuthSource(config: AuthConf, @Inject(AUTH) src: ModelSource, qsvc: QueryVerifierService): AuthSource<any, any> {
+    return new AuthModelSource(config, new ModelService(src, qsvc));
   }
 
   @InjectableFactory()
