@@ -5,6 +5,10 @@ import { ModelService, ModelSource } from '@travetto/model';
 import { BaseStrategy } from '@travetto/auth';
 import { ModelMongoConfig, ModelMongoSource } from '@travetto/model-mongo';
 import { QueryVerifierService } from '@travetto/model/src/service/query';
+import { AssetSource } from '@travetto/asset';
+import { AssetMongoSource, AssetMongoConfig } from '@travetto/asset-mongo';
+
+require('@travetto/express/src/extension/context');
 
 @Config('app')
 export class AppConfig {
@@ -18,6 +22,13 @@ class AuthMongo extends ModelMongoConfig { }
 
 @Config('auth.strategy')
 class AuthModelStrategy extends ModelStrategyConfig { }
+
+class AssetConfig {
+  @InjectableFactory()
+  static getAssetSource(config: AssetMongoConfig): AssetSource {
+    return new AssetMongoSource(config);
+  }
+}
 
 class AuthConfig {
 

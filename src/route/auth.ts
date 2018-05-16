@@ -7,7 +7,7 @@ import {
   Cache,
   TypedRequest
 } from '@travetto/express';
-import { SchemaBody } from '@travetto/express-schema';
+import { SchemaBody } from '@travetto/express/src/extension//schema';
 import { Authenticate, Authenticated, Unauthenticated, BaseStrategy } from '@travetto/auth';
 import { User } from '../model/user';
 import { UserService } from '../service/user';
