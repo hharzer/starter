@@ -17,7 +17,7 @@
     "@travetto/asset-express": "0.x.x",
     "@travetto/asset-mongo": "0.x.x",
     "@travetto/auth": "0.x.x",
-    "@travetto/context": "0.0.12",
+    "@travetto/context": "0.x.x",
     "@travetto/email": "0.x.x",
     "@travetto/express": "0.x.x",
     "@travetto/model": "0.x.x",

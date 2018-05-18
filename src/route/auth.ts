@@ -7,12 +7,11 @@ import {
   Cache,
   TypedRequest
 } from '@travetto/express';
-import { SchemaBody } from '@travetto/express/src/extension//schema';
-import { Authenticate, Authenticated, Unauthenticated, BaseStrategy } from '@travetto/auth';
+import { SchemaBody } from '@travetto/express/support/extension.schema';
+import { Authenticate, Authenticated, Unauthenticated } from '@travetto/auth';
 import { User } from '../model/user';
 import { UserService } from '../service/user';
 import { InjectableFactory } from '@travetto/di';
-import { ModelStrategy, ModelStrategyConfig } from '@travetto/auth/src/strategy/model';
 import { ModelService } from '@travetto/model';
 
 @Controller('/auth')
@@ -63,7 +62,7 @@ class Auth {
 
   @Post('/login')
   @Unauthenticated()
-  @Authenticate('local')
+  @Authenticate()
   async login(req: Request): Promise<any> {
     return this.userService.getActiveUser();
   }

@@ -8,7 +8,7 @@ import { AssetSource } from '@travetto/asset';
 import { AssetMongoSource, AssetMongoConfig } from '@travetto/asset-mongo';
 import { AuthSource } from '@travetto/auth/src/source';
 
-require('@travetto/express/src/extension/context');
+require('@travetto/express/support/extension.context');
 
 @Config('app')
 export class AppConfig {

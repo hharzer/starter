@@ -21,8 +21,13 @@ class Config {
   }
 
   @InjectableFactory(TEST)
-  static getModelStrategy<T extends BaseModel>(cfg: AuthModelConfig, svc: ModelService): AuthSource<T, AuthModelConfig> {
+  static getAuthSource<T extends BaseModel>(cfg: AuthModelConfig, svc: ModelService): AuthSource<T, AuthModelConfig> {
     return new AuthModelSource(cfg, svc);
+  }
+
+  @InjectableFactory(TEST)
+  static getAuthStrategy<T extends BaseModel>(src: AuthSource<T>): AuthStrategy<T> {
+    return new AuthStrategy(src);
   }
 
   @InjectableFactory(TEST)
