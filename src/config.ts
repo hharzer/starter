@@ -12,7 +12,7 @@ require('@travetto/express/support/extension.context');
 
 @Config('app')
 export class AppConfig {
-  baseUrl = 'http://localhost/rest'
+  baseUrl = 'http://localhost/rest';
 }
 
 export const AUTH = Symbol('auth');

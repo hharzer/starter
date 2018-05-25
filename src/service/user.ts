@@ -11,7 +11,7 @@ import { AuthModelSource } from '@travetto/auth/src/source/model';
 export class UserService {
 
   @Inject() config: AppConfig;
-  @Inject() strategy: AuthStrategy<User, any>;
+  @Inject() strategy: AuthStrategy<User>;
   @Inject() email: EmailService;
   @Inject() model: ModelService;
   @Inject() context: Context;
@@ -40,7 +40,7 @@ export class UserService {
     Welcome ${user.firstName},
 
     You are now signed up!
-        `, {})
+        `, {});
     return user;
   }
 
@@ -69,7 +69,7 @@ export class UserService {
 Hi ${user.firstName},
 
 Please follow click [reset password](${this.config.baseUrl}/auth/reset/${user.resetToken})!
-    `, {})
+    `, {});
     return;
   }
 }

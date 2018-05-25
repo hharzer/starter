@@ -32,7 +32,7 @@ class EmailServiceTest {
   @Test('Send email')
   async sendEmail() {
     const service = await DependencyRegistry.getInstance(EmailService);
-    await service.sendEmail([], { to: 'tim@eaiti.com', subject: 'Test', text: body, context });
+    await service.sendEmail([], { to: 'tim@eaiti.com', subject: 'Test', template: body, context });
     assert(true);
   }
 }

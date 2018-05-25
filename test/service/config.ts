@@ -7,7 +7,7 @@ import { AuthSource } from '@travetto/auth/src/source';
 import { AuthModelConfig, AuthModelSource } from '@travetto/auth/src/source/model';
 import { AuthStrategy } from '@travetto/auth';
 
-export const TEST = Symbol()
+export const TEST = Symbol();
 
 class Config {
   @InjectableFactory(TEST)
