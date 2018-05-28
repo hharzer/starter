@@ -1,4 +1,3 @@
-import * as moment from 'moment';
 import * as assert from 'assert';
 
 import { ModelService, ModelRegistry, ModelSource, BaseModel } from '@travetto/model';

@@ -5,7 +5,7 @@ import { Injectable, Inject } from '@travetto/di';
 @Injectable()
 class UserService {
   getMessage() {
-    return { message: 'Helloz' };
+    return { message: 'Hellob' };
   }
 }
 
