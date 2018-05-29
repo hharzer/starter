@@ -5,9 +5,9 @@
   "main": "./node_modules/@travetto/base/bootstrap",
   "scripts": {
     "test": "./node_modules/.bin/travetto-test",
-    "test:all": "npm run test src/test/**/*.ts",
+    "test:all": "npm run test test/.*.ts",
     "model": "./node_modules/@travetto/model/generate-model.sh",
-    "start": "node ./node_modules/.bin/travetto",
+    "start": "./node_modules/.bin/travetto",
     "debug": "node --debug-brk=5858 ./node_modules/.bin/travetto"
   },
   "author": "",
