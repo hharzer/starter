@@ -1,7 +1,7 @@
-import { Schema, SchemaBound } from '@travetto/schema';
+import { Schema } from '@travetto/schema';
 
 @Schema()
-export class Address extends SchemaBound {
+export class Address {
   street1: string;
   street2?: string;
   city: string;

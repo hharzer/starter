@@ -5,7 +5,7 @@ import { ModelMongoSource, ModelMongoConfig } from '@travetto/model-mongo';
 import { DependencyRegistry, Injectable, InjectableFactory, Inject } from '@travetto/di';
 import { Test, Suite, BeforeAll } from '@travetto/test';
 
-import { User, Address } from '../../src/model/user';
+import { User } from '../../src/model/user';
 import { UserService } from '../../src/service/user';
 import { RootRegistry } from '@travetto/registry';
 import { Context, WithContext } from '@travetto/context';
