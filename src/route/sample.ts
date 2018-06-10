@@ -4,23 +4,24 @@ import { Injectable, Inject } from '@travetto/di';
 
 @Injectable()
 class UserService {
-  getMessage() {
-    return { message: 'Hellob' };
+  private count = 0;
+
+  getMessage(): any {
+    return {
+      message: 'Hello world',
+      count: this.count++
+    };
   }
 }
 
 @Controller('/sample')
 class SampleRoute {
 
-  private count = 0;
-
   constructor(private service: UserService) { }
 
   @Get('/hello')
   async get(req: Request) {
-    this.count++;
-    const res = await this.service.getMessage() as any;
-    res.count = this.count;
+    const res = await this.service.getMessage();
     return res;
   }
 

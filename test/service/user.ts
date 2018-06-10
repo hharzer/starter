@@ -10,6 +10,7 @@ import { UserService } from '../../src/service/user';
 import { RootRegistry } from '@travetto/registry';
 import { Context, WithContext } from '@travetto/context';
 import { Schema, SchemaRegistry, SchemaValidator } from '@travetto/schema';
+import { GenerateUtil } from '@travetto/schema/support/util.generate';
 import { TEST } from './config';
 
 @Suite('User Services')
@@ -19,6 +20,7 @@ class UserServiceTest {
 
   @BeforeAll()
   async init() {
+    console.log('here');
     await RootRegistry.init();
     const svc = await DependencyRegistry.getInstance(ModelService, TEST);
     this.context = await DependencyRegistry.getInstance(Context);
@@ -28,7 +30,31 @@ class UserServiceTest {
 
   @Test('Delete a user')
   async removeUser() {
-    assert(true);
+    // TODO
+    const svc = await DependencyRegistry.getInstance(ModelService);
+
+    let user = User.from({
+      email: 'user@test.com',
+      firstName: 'First',
+      lastName: 'Last',
+      phone: '555-867-5309',
+      password: 'test-password'
+    });
+
+    user = await svc.save(User, user);
+    assert.ok(user.id);
+
+    const lookupFound = await svc.getAllByQuery(User, {
+      where: { id: user.id }
+    });
+    assert(lookupFound.length === 1);
+
+    svc.deleteById(User, user.id!);
+
+    const lookupMissing = await svc.getAllByQuery(User, {
+      where: { id: user.id }
+    });
+    assert(lookupMissing.length === 0);
   }
 
   @Test('Register a user')
