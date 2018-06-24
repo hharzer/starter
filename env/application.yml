@@ -2,3 +2,6 @@
 auth:
   model:
     modelClass: '@app:src.model.user.user#User'
+    usernameField: email
+    saltField: salt
+    hashField: hash

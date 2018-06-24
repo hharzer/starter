@@ -3,7 +3,7 @@ import * as assert from 'assert';
 import { ModelService, ModelRegistry, ModelSource, BaseModel } from '@travetto/model';
 import { ModelMongoSource, ModelMongoConfig } from '@travetto/model-mongo';
 import { DependencyRegistry, Injectable, InjectableFactory, Inject } from '@travetto/di';
-import { Test, Suite, BeforeAll } from '@travetto/test';
+import { Test, Suite, BeforeAll, AfterAll } from '@travetto/test';
 
 import { User } from '../../src/model/user';
 import { UserService } from '../../src/service/user';
@@ -22,8 +22,13 @@ class UserServiceTest {
   async init() {
     console.log('here');
     await RootRegistry.init();
-    const svc = await DependencyRegistry.getInstance(ModelService, TEST);
+    await DependencyRegistry.init();
     this.context = await DependencyRegistry.getInstance(Context);
+  }
+
+  @AfterAll()
+  async destroy() {
+    const svc = await DependencyRegistry.getInstance(ModelService, TEST);
     const db = (svc as any).source as ModelMongoSource;
     await db.resetDatabase();
   }
@@ -65,7 +70,10 @@ class UserServiceTest {
     }
   })
   async register() {
+    let start = Date.now();
+    const stamp = () => { require('fs').writeSync(1, `Delta: ${Date.now() - start}\n`); start = Date.now(); };
     const userService = await DependencyRegistry.getInstance(UserService, TEST);
+    stamp();
 
     const user: User = User.from({
       firstName: 'Test',
@@ -82,11 +90,13 @@ class UserServiceTest {
         country: 'USA'
       }
     });
+    stamp();
 
     const emptyUser: User = new User();
     const ctx = await DependencyRegistry.getInstance(Context);
 
     const res = await userService.register(user);
+    stamp();
 
     assert(res.id !== null);
     delete res.id;
@@ -99,5 +109,8 @@ class UserServiceTest {
     } catch (e) {
       assert(e.message === 'That email is already taken.');
     }
+    stamp();
+
+    throw new Error();
   }
 }
