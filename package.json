@@ -1,16 +1,23 @@
 {
   "name": "sample-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Reference application for the travetto framework",
+  "homepage": "https://travetto.io",
   "main": "./node_modules/@travetto/base/bootstrap",
   "scripts": {
     "test": "./node_modules/.bin/travetto-test",
     "test:all": "npm run test test/.*.ts",
-    "model": "./node_modules/@travetto/model/generate-model.sh",
-    "start": "./node_modules/.bin/travetto",
-    "debug": "node --debug-brk=5858 ./node_modules/.bin/travetto"
+    "start": "./node_modules/.bin/travetto"
   },
-  "author": "",
+  "keywords": [
+    "travetto",
+    "sample-project",
+    "express",
+    "web-app",
+    "authentication",
+    "typescript"
+  ],
+  "author": "Timothy Soehnlin",
   "license": "MIT",
   "dependencies": {
     "@travetto/asset": "0.x.x",
