@@ -1,17 +1,16 @@
 import { ModelService } from '@travetto/model';
 import { Context } from '@travetto/context';
-import { AuthStrategy } from '@travetto/auth';
 import { User } from '../model/user';
 import { AppConfig } from '../config';
 import { Injectable, Inject } from '@travetto/di';
 import { EmailService } from './email';
-import { AuthModelSource } from '@travetto/auth/src/source/model';
+import { AuthModelService } from '@travetto/auth-model';
 
 @Injectable()
 export class UserService {
 
   @Inject() config: AppConfig;
-  @Inject() strategy: AuthStrategy<User>;
+  @Inject() strategy: AuthModelService<User>;
   @Inject() email: EmailService;
   @Inject() model: ModelService;
   @Inject() context: Context;
@@ -34,7 +33,7 @@ export class UserService {
   }
 
   async register(user: User) {
-    user = await this.strategy.register!(user, user.password!);
+    user = await this.strategy.register(user);
 
     await this.email.sendUserEmail(this.getActiveUser(), 'Welcome to Sample App', `
     Welcome ${user.firstName},
@@ -64,7 +63,7 @@ export class UserService {
   }
 
   async resetPasswordStart(email: string) {
-    const user = await (this.strategy['source'] as AuthModelSource<User>).generateResetToken(email);
+    const user = await this.strategy.generateResetToken(email);
     await this.email.sendUserEmail(user, 'Password Reset for Sample App', `
 Hi ${user.firstName},
 

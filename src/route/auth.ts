@@ -1,18 +1,15 @@
-import * as util from 'util';
 import { Request, Response } from 'express';
 import {
-  Get, Post, Put, Delete,
+  Get, Post,
   Controller,
   Redirect,
-  Cache,
   TypedRequest
 } from '@travetto/express';
 import { SchemaBody } from '@travetto/express/support/extension.schema';
-import { Authenticate, Authenticated, Unauthenticated } from '@travetto/auth';
+import { Authenticate, Authenticated, Unauthenticated } from '@travetto/auth-express';
 import { User } from '../model/user';
 import { UserService } from '../service/user';
-import { InjectableFactory } from '@travetto/di';
-import { ModelService } from '@travetto/model';
+import { AUTH } from '../config';
 
 @Controller('/auth')
 class Auth {
@@ -24,7 +21,6 @@ class Auth {
   @SchemaBody(User)
   async register(req: TypedRequest<User>, res: Response, next: Function) {
     const user = await this.userService.register(req.body);
-    await util.promisify(req.login).call(req, user);
     return user;
   }
 
@@ -42,16 +38,16 @@ class Auth {
 
   @Get('/checkToken')
   async checkToken(req: Request) {
-    if (req.isUnauthenticated()) {
+    if (req.auth.unauthenticated) {
       throw { message: 'You are not logged in', statusCode: 401 };
     }
-    return req.principal;
+    return req.auth.context;
   }
 
   @Get('/logout')
   @Authenticated()
   async logout(req: Request): Promise<Redirect | {}> {
-    await req.doLogout();
+    await req.auth.logout();
 
     if ((req.headers.accept as any as string[] || []).includes('text/html')) {
       return new Redirect('/?message=Successfully Logged Out');
@@ -62,7 +58,7 @@ class Auth {
 
   @Post('/login')
   @Unauthenticated()
-  @Authenticate()
+  @Authenticate(AUTH)
   async login(req: Request): Promise<any> {
     return this.userService.getActiveUser();
   }

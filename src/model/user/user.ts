@@ -17,6 +17,7 @@ export class User extends BaseModel {
   email: string;
   phone: string;
   address?: Address;
+  permissions: string[];
 
   prePersist() {
     delete this.password; // Do not allow this to be saved;

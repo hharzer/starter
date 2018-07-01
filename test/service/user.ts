@@ -1,16 +1,14 @@
 import * as assert from 'assert';
 
-import { ModelService, ModelRegistry, ModelSource, BaseModel } from '@travetto/model';
-import { ModelMongoSource, ModelMongoConfig } from '@travetto/model-mongo';
-import { DependencyRegistry, Injectable, InjectableFactory, Inject } from '@travetto/di';
+import { ModelService } from '@travetto/model';
+import { ModelMongoSource } from '@travetto/model-mongo';
+import { DependencyRegistry } from '@travetto/di';
 import { Test, Suite, BeforeAll, AfterAll } from '@travetto/test';
 
 import { User } from '../../src/model/user';
 import { UserService } from '../../src/service/user';
 import { RootRegistry } from '@travetto/registry';
 import { Context, WithContext } from '@travetto/context';
-import { Schema, SchemaRegistry, SchemaValidator } from '@travetto/schema';
-import { GenerateUtil } from '@travetto/schema/support/util.generate';
 import { TEST } from './config';
 
 @Suite('User Services')
@@ -43,7 +41,8 @@ class UserServiceTest {
       firstName: 'First',
       lastName: 'Last',
       phone: '555-867-5309',
-      password: 'test-password'
+      password: 'test-password',
+      permissions: ['a', 'b']
     });
 
     user = await svc.save(User, user);

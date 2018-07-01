@@ -1,11 +1,13 @@
 import { InjectableFactory, Inject } from '@travetto/di';
 import { ModelMongoConfig, ModelMongoSource } from '@travetto/model-mongo';
-import { ModelSource, ModelService, BaseModel } from '@travetto/model';
+import { ModelSource, ModelService } from '@travetto/model';
+import { AuthProvider } from '@travetto/auth-express';
 import { QueryVerifierService } from '@travetto/model/src/service/query';
+import { AuthModelService, RegisteredPrincipalConfig } from '@travetto/auth-model';
+import { AuthModelProvider } from '@travetto/auth-model/support/auth.express';
+
 import { UserService } from '../../src/service/user';
-import { AuthSource } from '@travetto/auth/src/source';
-import { AuthModelConfig, AuthModelSource } from '@travetto/auth/src/source/model';
-import { AuthStrategy } from '@travetto/auth';
+import { User } from '../../src/model/user';
 
 export const TEST = Symbol();
 
@@ -21,17 +23,27 @@ class Config {
   }
 
   @InjectableFactory(TEST)
-  static getAuthSource<T extends BaseModel>(cfg: AuthModelConfig, svc: ModelService): AuthSource<T, AuthModelConfig> {
-    return new AuthModelSource(cfg, svc);
+  static getAuthModelService(@Inject(TEST) svc: ModelService): AuthModelService<User> {
+    return new AuthModelService(svc,
+      new RegisteredPrincipalConfig(User, {
+        id: 'email',
+        password: 'password',
+        salt: 'salt',
+        hash: 'hash',
+        resetExpires: 'resetExpires',
+        resetToken: 'resetToken',
+        permissions: 'permissions'
+      })
+    );
   }
 
   @InjectableFactory(TEST)
-  static getAuthStrategy<T extends BaseModel>(src: AuthSource<T>): AuthStrategy<T> {
-    return new AuthStrategy(src);
+  static getProvider(@Inject(TEST) svc: AuthModelService<User>): AuthProvider<User> {
+    return new AuthModelProvider(svc);
   }
 
   @InjectableFactory(TEST)
-  static getUserSvc(@Inject(TEST) svc: ModelService, @Inject(TEST) strat: AuthStrategy<any>): UserService {
+  static getUserSvc(@Inject(TEST) svc: ModelService, @Inject(TEST) strat: AuthModelService<any>): UserService {
     const out = new UserService();
     out.model = svc;
     out.strategy = strat;
