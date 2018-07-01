@@ -9,7 +9,7 @@ import { AuthModelProvider } from '@travetto/auth-model/support/auth.express';
 import { UserService } from '../../src/service/user';
 import { User } from '../../src/model/user';
 
-export const TEST = Symbol();
+export const TEST = Symbol('TEST');
 
 class Config {
   @InjectableFactory(TEST)
@@ -22,7 +22,7 @@ class Config {
     return new ModelService(src, qvs);
   }
 
-  @InjectableFactory(TEST)
+  @InjectableFactory()
   static getAuthModelService(@Inject(TEST) svc: ModelService): AuthModelService<User> {
     return new AuthModelService(svc,
       new RegisteredPrincipalConfig(User, {
@@ -38,12 +38,12 @@ class Config {
   }
 
   @InjectableFactory(TEST)
-  static getProvider(@Inject(TEST) svc: AuthModelService<User>): AuthProvider<User> {
+  static getProvider(svc: AuthModelService<User>): AuthProvider<User> {
     return new AuthModelProvider(svc);
   }
 
   @InjectableFactory(TEST)
-  static getUserSvc(@Inject(TEST) svc: ModelService, @Inject(TEST) strat: AuthModelService<any>): UserService {
+  static getUserSvc(@Inject(TEST) svc: ModelService, strat: AuthModelService<any>): UserService {
     const out = new UserService();
     out.model = svc;
     out.strategy = strat;

@@ -70,7 +70,7 @@ class UserServiceTest {
   })
   async register() {
     let start = Date.now();
-    const stamp = () => { require('fs').writeSync(1, `Delta: ${Date.now() - start}\n`); start = Date.now(); };
+    const stamp = () => { console.log(`Delta: ${Date.now() - start}`); start = Date.now(); };
     const userService = await DependencyRegistry.getInstance(UserService, TEST);
     stamp();
 
@@ -80,6 +80,7 @@ class UserServiceTest {
       email: 'ops@eaiti.com',
       password: 'testpw',
       phone: '5713064683',
+      permissions: ['none'],
       address: {
         street1: '1945 Old Gallows RD',
         street2: 'STE 133',
@@ -92,8 +93,7 @@ class UserServiceTest {
     stamp();
 
     const emptyUser: User = new User();
-    const ctx = await DependencyRegistry.getInstance(Context);
-
+    emptyUser.email = user.email;
     const res = await userService.register(user);
     stamp();
 
@@ -109,7 +109,5 @@ class UserServiceTest {
       assert(e.message === 'That email is already taken.');
     }
     stamp();
-
-    throw new Error();
   }
 }

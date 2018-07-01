@@ -1,10 +1,10 @@
 import { ModelService } from '@travetto/model';
-import { Context } from '@travetto/context';
 import { User } from '../model/user';
 import { AppConfig } from '../config';
 import { Injectable, Inject } from '@travetto/di';
 import { EmailService } from './email';
 import { AuthModelService } from '@travetto/auth-model';
+import { AuthService } from '@travetto/auth';
 
 @Injectable()
 export class UserService {
@@ -13,7 +13,7 @@ export class UserService {
   @Inject() strategy: AuthModelService<User>;
   @Inject() email: EmailService;
   @Inject() model: ModelService;
-  @Inject() context: Context;
+  @Inject() auth: AuthService;
 
   async get(userId: string) {
     const user = await this.model.getById(User, userId);
@@ -21,11 +21,11 @@ export class UserService {
   }
 
   getActiveUser() {
-    return this.context.get().user;
+    return this.auth.context.principal as User;
   }
 
   getActiveUserId() {
-    return this.getActiveUser()._id;
+    return this.getActiveUser().id;
   }
 
   getActiveUseAccesType() {
@@ -35,7 +35,7 @@ export class UserService {
   async register(user: User) {
     user = await this.strategy.register(user);
 
-    await this.email.sendUserEmail(this.getActiveUser(), 'Welcome to Sample App', `
+    await this.email.sendUserEmail(user, 'Welcome to Sample App', `
     Welcome ${user.firstName},
 
     You are now signed up!
