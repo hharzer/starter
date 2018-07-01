@@ -32,6 +32,11 @@ class AssetConfig {
 class AuthConfig {
 
   @InjectableFactory(AUTH)
+  static getModelSource(conf: AuthMongo): ModelSource {
+    return new ModelMongoSource(conf);
+  }
+
+  @InjectableFactory()
   static getAuthModelService(@Inject(AUTH) src: ModelSource, qsvc: QueryVerifierService): AuthModelService<User> {
     return new AuthModelService(
       new ModelService(src, qsvc),
@@ -48,7 +53,7 @@ class AuthConfig {
   }
 
   @InjectableFactory(AUTH)
-  static getProvider(@Inject(AUTH) svc: AuthModelService<User>): AuthProvider<User> {
+  static getProvider(svc: AuthModelService<User>): AuthProvider<User> {
     return new AuthModelProvider(svc);
   }
 
