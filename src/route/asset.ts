@@ -13,13 +13,13 @@ class AssetRoute {
   @Inject()
   asset: AssetService;
 
-  @Cache(1, 'year')
+  @Cache(1, 'y')
   @Get(/(.*).(png|jpg|jpeg|gif|bmp)/i)
   async getImage(req: Request) {
     return await this.image.getImage(req.path, req.query);
   }
 
-  @Cache(1, 'year')
+  @Cache(1, 'y')
   @Get(/(.*)/)
   async get(req: Request) {
     return await this.asset.get(req.path);
