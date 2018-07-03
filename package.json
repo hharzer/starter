@@ -17,7 +17,6 @@
     "authentication",
     "typescript"
   ],
-  "author": "Timothy Soehnlin",
   "license": "MIT",
   "dependencies": {
     "@travetto/asset": "0.x.x",
