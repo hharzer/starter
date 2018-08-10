@@ -7,10 +7,9 @@ import { AssetSource } from '@travetto/asset';
 import { AssetMongoSource, AssetMongoConfig } from '@travetto/asset-mongo';
 import { AuthModelService, RegisteredPrincipalConfig } from '@travetto/auth-model';
 import { AuthProvider } from '@travetto/auth-express';
-import { AuthModelProvider } from '@travetto/auth-model/support/auth.express';
+import { AuthModelProvider } from '@travetto/auth-model/extension/auth.express';
+import { } from '@travetto/express/extension/context';
 import { User } from './model/user';
-
-require('@travetto/express/support/extension.context');
 
 @Config('app')
 export class AppConfig {

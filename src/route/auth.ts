@@ -5,7 +5,7 @@ import {
   Redirect,
   TypedRequest
 } from '@travetto/express';
-import { SchemaBody } from '@travetto/express/support/extension.schema';
+import { SchemaBody } from '@travetto/schema/extension/express';
 import { Authenticate, Authenticated, Unauthenticated } from '@travetto/auth-express';
 import { User } from '../model/user';
 import { UserService } from '../service/user';
