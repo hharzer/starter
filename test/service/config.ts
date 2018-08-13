@@ -4,7 +4,7 @@ import { ModelSource, ModelService } from '@travetto/model';
 import { AuthProvider } from '@travetto/auth-express';
 import { QueryVerifierService } from '@travetto/model/src/service/query';
 import { AuthModelService, RegisteredPrincipalConfig } from '@travetto/auth-model';
-import { AuthModelProvider } from '@travetto/auth-model/support/auth.express';
+import { AuthModelProvider } from '@travetto/auth-model/extension/auth.express';
 
 import { UserService } from '../../src/service/user';
 import { User } from '../../src/model/user';

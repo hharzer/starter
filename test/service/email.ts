@@ -1,11 +1,11 @@
-import { EmailService } from '../../src/service/email';
-import { DependencyRegistry, Injectable } from '@travetto/di';
-import { Test, Suite, BeforeAll } from '@travetto/test';
-import { RootRegistry } from '@travetto/registry';
-
 import * as assert from 'assert';
-import { MailConfig } from '@travetto/email/src/config';
+
+import { DependencyRegistry } from '@travetto/di';
+import { Test, Suite, BeforeAll } from '@travetto/test';
+
 import { TemplateEngine } from '@travetto/email/src/template';
+
+import { EmailService } from '../../src/service/email';
 
 const body = `<style>
   strong { color: orange }

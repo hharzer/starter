@@ -1,5 +1,8 @@
 import { Schema } from '@travetto/schema';
 
+/**
+ * User Address
+ */
 @Schema()
 export class Address {
   street1: string;

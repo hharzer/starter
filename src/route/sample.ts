@@ -14,20 +14,29 @@ class UserService {
   }
 }
 
+/**
+ * Some sample routes, for posterity
+ */
 @Controller('/sample')
 class SampleRoute {
 
   constructor(private service: UserService) { }
 
+  /**
+   * Caching message
+   */
   @Get('/hello')
   @Cache(1, 'd')
-  async get(req: Request) {
+  async get(req: Request): Promise<String> {
     const res = await this.service.getMessage();
     return res;
   }
 
+  /**
+   * Simple Echo
+   */
   @Post('/')
-  async echo(req: Request) {
+  async echo(req: Request): Promise<Object> {
     return req.body;
   }
 }

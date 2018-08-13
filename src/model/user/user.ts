@@ -1,6 +1,9 @@
 import { Model, BaseModel } from '@travetto/model';
 import { Address } from './address';
 
+/**
+ * Core User Model
+ */
 @Model()
 export class User extends BaseModel {
 
