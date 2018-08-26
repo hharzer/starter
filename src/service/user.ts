@@ -1,10 +1,11 @@
 import { ModelService } from '@travetto/model';
-import { User } from '../model/user';
-import { AppConfig } from '../config';
 import { Injectable, Inject } from '@travetto/di';
-import { EmailService } from './email';
 import { AuthModelService } from '@travetto/auth-model';
 import { AuthService } from '@travetto/auth';
+
+import { User } from '../model/user';
+import { AppConfig } from '../config';
+import { EmailService } from './email';
 
 @Injectable()
 export class UserService {

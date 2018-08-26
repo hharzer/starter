@@ -1,11 +1,21 @@
 import * as assert from 'assert';
 
-import { DependencyRegistry } from '@travetto/di';
+import { DependencyRegistry, InjectableFactory } from '@travetto/di';
 import { Test, Suite, BeforeAll } from '@travetto/test';
 
-import { TemplateEngine } from '@travetto/email/src/template';
-
+import { MailTemplateEngine, MailTransport, NullTransport } from '@travetto/email';
+import { DefaultMailTemplateEngine } from '@travetto/email-template';
 import { EmailService } from '../../src/service/email';
+
+class Config {
+  @InjectableFactory()
+  static getTransport(): MailTransport {
+    return new NullTransport();
+  }
+}
+
+DefaultMailTemplateEngine.name;
+EmailService.name;
 
 const body = `<style>
   strong { color: orange }
@@ -23,10 +33,10 @@ class EmailServiceTest {
 
   @Test('Verify Templating')
   async templating() {
-    const tplr = await DependencyRegistry.getInstance(TemplateEngine);
+    const tplr = await DependencyRegistry.getInstance(MailTemplateEngine);
     const result = (await tplr.template(body, context)).html;
 
-    assert(/<strong style="color: orange;">\s*Brad\s*<\/strong>/.test(result));
+    assert(/<strong>\s*Brad\s*<\/strong>/.test(result));
   }
 
   @Test('Send email')

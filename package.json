@@ -1,6 +1,6 @@
 {
   "name": "@travetto/starter",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "private": true,
   "description": "Reference application for the travetto framework",
   "homepage": "https://travetto.io",
@@ -20,21 +20,24 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@travetto/asset": "0.x.x",
-    "@travetto/asset-express": "0.x.x",
-    "@travetto/asset-mongo": "0.x.x",
-    "@travetto/auth": "0.x.x",
-    "@travetto/auth-express": "0.x.x",
-    "@travetto/auth-model": "0.x.x",
-    "@travetto/context": "0.x.x",
-    "@travetto/email": "0.x.x",
-    "@travetto/express": "0.x.x",
-    "@travetto/log": "0.x.x",
-    "@travetto/model": "0.x.x",
-    "@travetto/model-mongo": "0.x.x",
-    "@travetto/swagger": "0.x.x"
+    "@travetto/asset": "^0.2.6",
+    "@travetto/asset-mongo": "^0.2.6",
+    "@travetto/asset-rest": "^0.2.6",
+    "@travetto/auth": "^0.2.6",
+    "@travetto/auth-model": "^0.2.6",
+    "@travetto/auth-passport": "^0.2.13",
+    "@travetto/auth-rest": "^0.2.6",
+    "@travetto/context": "^0.2.6",
+    "@travetto/email": "^0.2.6",
+    "@travetto/email-template": "^0.2.6",
+    "@travetto/log": "^0.2.4",
+    "@travetto/model": "^0.2.6",
+    "@travetto/model-mongo": "^0.2.6",
+    "@travetto/rest": "^0.2.6",
+    "@travetto/rest-express": "^0.2.6",
+    "@travetto/swagger": "^0.2.8"
   },
   "devDependencies": {
-    "@travetto/test": "0.x.x"
+    "@travetto/test": "^0.2.4"
   }
 }

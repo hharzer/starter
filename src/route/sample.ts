@@ -1,5 +1,4 @@
-import { Request } from 'express';
-import { Get, Post, Controller, Cache } from '@travetto/express';
+import { Get, Post, Controller, Cache, Request } from '@travetto/rest';
 import { Injectable } from '@travetto/di';
 
 @Injectable()

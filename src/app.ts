@@ -1,15 +1,20 @@
 import { InjectableFactory, Inject, Application } from '@travetto/di';
-import { ModelMongoSource, ModelMongoConfig } from '@travetto/model-mongo';
-import { ModelSource, ModelService } from '@travetto/model';
-import { AuthModelProvider } from '@travetto/auth-model/extension/auth.express';
-import { AuthModelService, RegisteredPrincipalConfig } from '@travetto/auth-model';
-import { QueryVerifierService } from '@travetto/model/src/service/query';
+
 import { AssetSource } from '@travetto/asset';
 import { AssetMongoConfig, AssetMongoSource } from '@travetto/asset-mongo';
-import { AuthProvider } from '@travetto/auth-express';
-import { ExpressApp } from '@travetto/express';
-import { AuthPassportOperator } from '@travetto/auth-express/extension/passport';
-import { ContextOperator } from '@travetto/express/extension/context';
+
+import { ModelSource, ModelService } from '@travetto/model';
+import { QueryVerifierService } from '@travetto/model/src/service/query';
+import { ModelMongoSource, ModelMongoConfig } from '@travetto/model-mongo';
+
+import { AuthModelService, RegisteredPrincipalConfig } from '@travetto/auth-model';
+import { AuthProvider } from '@travetto/auth-rest';
+import { AuthPassportInterceptor } from '@travetto/auth-passport';
+import { AuthModelProvider } from '@travetto/auth-model/extension/auth.rest';
+
+import { RestApp, RestAppProvider } from '@travetto/rest';
+import { ContextInterceptor } from '@travetto/rest/extension/context';
+import { ExpressAppProvider } from '@travetto/rest-express';
 
 import { AuthMongo, AUTH } from './config';
 import { User } from './model/user';
@@ -53,11 +58,19 @@ export class SampleApp {
     return new ModelMongoSource(config);
   }
 
-  @Inject()
-  private contextOp: ContextOperator;
+  @InjectableFactory()
+  static getAppProvider(): RestAppProvider {
+    return new ExpressAppProvider();
+  }
 
   @Inject()
-  private express: ExpressApp;
+  private contextOp: ContextInterceptor;
+
+  @Inject()
+  private passport: AuthPassportInterceptor;
+
+  @Inject()
+  private express: RestApp;
 
   run() {
     this.express.run();

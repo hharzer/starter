@@ -1,21 +1,17 @@
-import { Request, Response } from 'express';
-import {
-  Get, Post,
-  Controller,
-  Redirect,
-  TypedRequest
-} from '@travetto/express';
-import { SchemaBody } from '@travetto/schema/extension/express';
-import { Authenticate, Authenticated, Unauthenticated } from '@travetto/auth-express';
+import { Get, Post, Controller, Redirect, TypedBody, Request } from '@travetto/rest';
+import { Authenticate, Authenticated, Unauthenticated } from '@travetto/auth-rest';
+import { AuthContext } from '@travetto/auth';
+import { SchemaBody } from '@travetto/schema/extension/rest';
+
 import { User } from '../model/user';
 import { UserService } from '../service/user';
 import { AUTH } from '../config';
-import { AuthContext } from '@travetto/auth';
 
 /**
  * User authentication, and registration
  */
 @Controller('/auth')
+@Authenticated()
 class Auth {
 
   constructor(private userService: UserService) { }
@@ -26,7 +22,7 @@ class Auth {
   @Unauthenticated()
   @Post('/register')
   @SchemaBody(User)
-  async register(req: TypedRequest<User>, res: Response, next: Function): Promise<User> {
+  async register(req: TypedBody<User>): Promise<User> {
     const user = await this.userService.register(req.body);
     return user;
   }
@@ -37,7 +33,7 @@ class Auth {
    */
   @Unauthenticated()
   @Post('/reset/:email')
-  async resetPasswordStart(req: Request, res: Response, next: Function) {
+  async resetPasswordStart(req: Request) {
     return await this.userService.resetPasswordStart(req.params.email);
   }
 
@@ -46,7 +42,7 @@ class Auth {
    */
   @Unauthenticated()
   @Post('/reset')
-  async resetPassword(req: Request, res: Response, next: Function): Promise<User> {
+  async resetPassword(req: Request): Promise<User> {
     return await this.userService.resetPassword(req.body.email, req.body.password, req.body.token);
   }
 
@@ -82,7 +78,7 @@ class Auth {
   @Post('/login')
   @Unauthenticated()
   @Authenticate(AUTH)
-  async login(req: Request): Promise<User> {
+  async login(): Promise<User> {
     return this.userService.getActiveUser();
   }
 }
