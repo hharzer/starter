@@ -25,11 +25,11 @@
     "@travetto/asset-rest": "^0.2.6",
     "@travetto/auth": "^0.2.6",
     "@travetto/auth-model": "^0.2.6",
-    "@travetto/auth-passport": "^0.2.13",
+    "@travetto/auth-passport": "^0.2.14",
     "@travetto/auth-rest": "^0.2.6",
     "@travetto/context": "^0.2.6",
     "@travetto/email": "^0.2.6",
-    "@travetto/email-template": "^0.2.6",
+    "@travetto/email-template": "^0.2.12",
     "@travetto/log": "^0.2.4",
     "@travetto/model": "^0.2.6",
     "@travetto/model-mongo": "^0.2.6",
@@ -38,6 +38,6 @@
     "@travetto/swagger": "^0.2.8"
   },
   "devDependencies": {
-    "@travetto/test": "^0.2.4"
+    "@travetto/test": "^0.2.11"
   }
 }
